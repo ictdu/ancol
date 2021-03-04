@@ -1,10 +1,10 @@
 <template>
   <div class="fixed-plugin" v-click-outside="closeDropDown">
     <div class="dropdown show-dropdown" :class="{ show: isOpen }">
-      <a data-toggle="dropdown">
+      <!-- <a data-toggle="dropdown">
         <i class="fa fa-cog fa-2x" @click="toggleDropDown"> </i>
-      </a>
-      <ul class="dropdown-menu" :class="{ show: isOpen }">
+      </a> -->
+      <!-- <ul class="dropdown-menu" :class="{ show: isOpen }">
         <li class="header-title">Sidebar Filters</li>
         <li class="adjustments-line text-center">
           <span
@@ -85,7 +85,7 @@
             show-count
           ></gh-btns-star>
         </li>
-      </ul>
+      </ul> -->
     </div>
   </div>
 </template>

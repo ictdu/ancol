@@ -4,20 +4,20 @@
     :data-color="sidebarItemColor"
     :data-image="sidebarBackgroundImage"
     :style="sidebarStyle"
+    style="background-color: black !important;"
   >
     <div class="logo">
       <a href="#" class="simple-text logo-mini">
         <div class="logo-img">
-          <img :src="imgLogo" alt="" />
+          <!-- <img :src="imgLogo" alt="" /> -->
         </div>
       </a>
 
       <a
-        href="https://www.creative-tim.com/product/vue-material-dashboard"
-        target="_blank"
+        href="#"
         class="simple-text logo-normal"
       >
-        {{ title }}
+        <!-- {{ title }} -->ANCOL
       </a>
     </div>
     <div class="sidebar-wrapper">
@@ -49,10 +49,10 @@ export default {
       type: String,
       default: "Vue MD"
     },
-    sidebarBackgroundImage: {
-      type: String,
-      default: require("@/assets/img/sidebar-2.jpg")
-    },
+    // sidebarBackgroundImage: {
+    //   type: String,
+    //   default: require("@/assets/img/sidebar-2.jpg")
+    // },
     imgLogo: {
       type: String,
       default: require("@/assets/img/vue-logo.png")
