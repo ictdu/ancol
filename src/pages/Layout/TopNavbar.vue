@@ -48,7 +48,7 @@
               </drop-down>
             </md-list-item> -->
 
-            <li class="md-list-item">
+            <!-- <li class="md-list-item">
               <a
                 href="#/notifications"
                 class="md-list-item-router md-list-item-container md-button-clean dropdown"
@@ -74,11 +74,42 @@
                   </drop-down>
                 </div>
               </a>
-            </li>
-
+            </li> -->
+          <li class="md-list-item">
+              <a
+                  class="md-list-item-router md-list-item-container md-button-clean dropdown"
+              >
+                  <div class="md-list-item-content">
+                      <drop-down>
+                          <md-button
+                              slot="title"
+                              class="md-raised md-warning md-dense"
+                              data-toggle="dropdown"
+                              style="color: black !important"
+                          >
+                              <!-- <md-icon>person</md-icon> -->
+                              <i class="material-icons" style="color: black !important;">person</i>
+                          </md-button>
+                          <ul
+                              class="dropdown-menu dropdown-menu-right"
+                          >
+                              <li>
+                                  <a href="#/user"
+                                      >Your Profile</a
+                                  >
+                              </li>
+                              <li>
+                                  <a>Log out</a>
+                              </li>
+                          </ul>
+                      </drop-down>
+                  </div>
+              </a>
+          </li>
             <md-list-item href="#/user">
-              <i class="material-icons">person</i>
+              
               <p class="hidden-lg hidden-md">Profile</p>
+              
             </md-list-item>
           </md-list>
         </div>
