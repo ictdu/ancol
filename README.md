@@ -1,1 +1,0 @@
-# Ancol Web Application #
