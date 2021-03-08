@@ -102,12 +102,27 @@ namespace Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
+                    b.Property<string>("SellerId")
+                        .HasColumnType("varchar(767)");
+
                     b.Property<int>("Stocks")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SellerId");
+
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Domain.Seller", b =>
+                {
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("varchar(767)");
+
+                    b.HasKey("AppUserId");
+
+                    b.ToTable("Sellers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -304,6 +319,22 @@ namespace Persistence.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Domain.Product", b =>
+                {
+                    b.HasOne("Domain.Seller", "Seller")
+                        .WithMany("Products")
+                        .HasForeignKey("SellerId");
+                });
+
+            modelBuilder.Entity("Domain.Seller", b =>
+                {
+                    b.HasOne("Domain.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

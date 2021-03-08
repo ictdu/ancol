@@ -25,7 +25,23 @@ namespace API
 
             if (ctx.Products.Any()) return;
 
-            ctx.Products.AddRange(data.Products);
+            var user1 = new AppUser
+            {
+                Email = "seller1@test.com",
+                UserName = "seller1",
+                Firstname = "Jacky",
+                Lastname = "Mao"
+            };
+
+            userManager.CreateAsync(user1, "Password").Wait();
+
+            var seller1 = new Seller
+            {
+                AppUser = user1,
+                Products = data.Products
+            };
+
+            ctx.Sellers.Add(seller1);
 
             ctx.SaveChanges();
         }

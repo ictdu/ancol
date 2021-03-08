@@ -16,10 +16,6 @@
     <ProjectReference Include="..\Application\Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Security\" />
-  </ItemGroup>
-
   <ProjectExtensions><VisualStudio><UserProperties seed_1json__JsonSchema="json" /></VisualStudio></ProjectExtensions>
 
 </Project>

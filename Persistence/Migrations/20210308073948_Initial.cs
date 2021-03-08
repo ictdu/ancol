@@ -4,7 +4,7 @@ using MySql.Data.EntityFrameworkCore.Metadata;
 
 namespace Persistence.Migrations
 {
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -180,6 +180,45 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Sellers",
+                columns: table => new
+                {
+                    AppUserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sellers", x => x.AppUserId);
+                    table.ForeignKey(
+                        name: "FK_Sellers_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<byte[]>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Stocks = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    ImagePath = table.Column<string>(nullable: true),
+                    SellerId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_Sellers_SellerId",
+                        column: x => x.SellerId,
+                        principalTable: "Sellers",
+                        principalColumn: "AppUserId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -216,6 +255,11 @@ namespace Persistence.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_SellerId",
+                table: "Products",
+                column: "SellerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -239,7 +283,13 @@ namespace Persistence.Migrations
                 name: "IdentityUser");
 
             migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Sellers");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

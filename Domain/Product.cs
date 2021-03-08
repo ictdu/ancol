@@ -14,6 +14,6 @@ namespace Domain
 
         public Seller Seller { get; set; }
 
-        public Guid SellerId { get; set; }
+        public string SellerId { get; set; }
     }
 }

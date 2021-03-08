@@ -7,6 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using Application.User;
+using System.Linq;
 
 namespace Application.Product
 {
@@ -22,16 +24,19 @@ namespace Application.Product
         {
             private readonly DataContext _ctx;
             private readonly IMapper _mapper;
+            private readonly IUserAccessor _userAccessor;
 
-            public Handler(DataContext ctx, IMapper mapper)
+            public Handler(DataContext ctx, IMapper mapper, IUserAccessor userAccessor)
             {
                 _ctx = ctx;
                 _mapper = mapper;
+                this._userAccessor = userAccessor;
             }
 
             public async Task<List<ProductDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var product = await _ctx.Products.ToListAsync();
+                var product = await _ctx.Products.Where(x => x.SellerId == _userAccessor.GetCurrentUserId())
+                    .ToListAsync();
 
                 return _mapper.Map<List<ProductDto>>(product);
             }

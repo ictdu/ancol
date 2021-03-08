@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210307111736_Init")]
-    partial class Init
+    [Migration("20210308073948_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -87,6 +87,44 @@ namespace Persistence.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Domain.Product", b =>
+                {
+                    b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SellerId")
+                        .HasColumnType("varchar(767)");
+
+                    b.Property<int>("Stocks")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SellerId");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Domain.Seller", b =>
+                {
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("varchar(767)");
+
+                    b.HasKey("AppUserId");
+
+                    b.ToTable("Sellers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -283,6 +321,22 @@ namespace Persistence.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Domain.Product", b =>
+                {
+                    b.HasOne("Domain.Seller", "Seller")
+                        .WithMany("Products")
+                        .HasForeignKey("SellerId");
+                });
+
+            modelBuilder.Entity("Domain.Seller", b =>
+                {
+                    b.HasOne("Domain.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

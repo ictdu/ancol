@@ -1,4 +1,5 @@
 ﻿using Application.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,11 @@ namespace API.Controllers
 {
     public class UsersController : BaseController
     {
-
-        [HttpPost]
-        public async Task<UserDto> Login()
+        [AllowAnonymous]
+        [HttpPost("login")]
+        public async Task<object> Login(Login.Query query)
         {
-            return await Mediator.Send(new Login.Query());
+            return await Mediator.Send(query);
         }
     }
 }
