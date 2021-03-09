@@ -12,6 +12,8 @@ namespace Domain
         public string Description { get; set; }
         public string ImagePath { get; set; }
 
+        public decimal Price { get; set; }
+
         public Seller Seller { get; set; }
 
         public string SellerId { get; set; }

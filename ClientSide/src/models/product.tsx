@@ -3,5 +3,6 @@ export interface Product {
     name: string;
     stocks: number;
     description: string;
+    price: number;
     imagePath: string;
 }

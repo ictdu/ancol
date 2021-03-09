@@ -13,7 +13,7 @@ export const ProductCard: React.FC<IProps> = ({ product }) => {
             <Image src='https://i.stack.imgur.com/y9DpT.jpg' wrapped ui={false} />
             <Card.Content>
                 <Label as='a' color='orange' ribbon>
-                    {formatToLocalPH(250)}
+                    {formatToLocalPH(product.price)}
                 </Label>
                 <Card.Header style={{ marginTop: '1em' }}>{product.name}</Card.Header>
                 <Card.Meta>

@@ -3,57 +3,68 @@
     {
       "Name": "venenatis",
       "Stocks": 75,
-      "Description": "convallis est, vitae sodales nisi magna sed dui. Fusce aliquam,"
+      "Description": "convallis est, vitae sodales nisi magna sed dui. Fusce aliquam,",
+      "Price": 253.33
     },
     {
       "Name": "nunc",
       "Stocks": 8,
-      "Description": "habitant morbi tristique senectus et netus et malesuada fames ac"
+      "Description": "habitant morbi tristique senectus et netus et malesuada fames ac",
+      "Price": 444.33
     },
     {
       "Name": "Duis",
       "Stocks": 90,
-      "Description": "mauris erat eget ipsum. Suspendisse sagittis. Nullam vitae diam. Proin"
+      "Description": "mauris erat eget ipsum. Suspendisse sagittis. Nullam vitae diam. Proin",
+      "Price": 331.33
     },
     {
       "Name": "velit.",
       "Stocks": 13,
-      "Description": "fermentum risus, at fringilla purus mauris a nunc. In at"
+      "Description": "fermentum risus, at fringilla purus mauris a nunc. In at",
+      "Price": 663.66
     },
     {
       "Name": "sagittis",
       "Stocks": 2,
-      "Description": "varius ultrices, mauris ipsum porta elit, a feugiat tellus lorem"
+      "Description": "varius ultrices, mauris ipsum porta elit, a feugiat tellus lorem",
+      "Price": 333.55
     },
     {
       "Name": "ante,",
       "Stocks": 74,
-      "Description": "neque. In ornare sagittis felis. Donec tempor, est ac mattis"
+      "Description": "neque. In ornare sagittis felis. Donec tempor, est ac mattis",
+      "Price": 12.35
     },
     {
       "Name": "mattis.",
       "Stocks": 14,
-      "Description": "lacus vestibulum lorem, sit amet ultricies sem magna nec quam."
+      "Description": "lacus vestibulum lorem, sit amet ultricies sem magna nec quam.",
+      "Price": 46.12
     },
     {
       "Name": "risus.",
       "Stocks": 67,
-      "Description": "Proin eget odio. Aliquam vulputate ullamcorper magna. Sed eu eros."
+      "Description": "Proin eget odio. Aliquam vulputate ullamcorper magna. Sed eu eros.",
+      "Price": 45.12
     },
     {
       "Name": "Praesent",
       "Stocks": 37,
-      "Description": "Donec elementum, lorem ut aliquam iaculis, lacus pede sagittis augue,"
+      "Description": "Donec elementum, lorem ut aliquam iaculis, lacus pede sagittis augue,",
+      "Price": 333.25
     },
     {
       "Name": "est,",
       "Stocks": 89,
-      "Description": "magnis dis parturient montes, nascetur ridiculus mus. Proin vel arcu"
+      "Description": "magnis dis parturient montes, nascetur ridiculus mus. Proin vel arcu",
+      "Price": 22.25
     },
     {
       "Name": "auctor",
       "Stocks": 74,
-      "Description": "dui. Cras pellentesque. Sed dictum. Proin eget odio. Aliquam vulputate"
+      "Description": "dui. Cras pellentesque. Sed dictum. Proin eget odio. Aliquam vulputate",
+      "Price": 78.25
     }
   ]
 }
