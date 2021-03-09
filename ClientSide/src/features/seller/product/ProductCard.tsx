@@ -1,18 +1,27 @@
 import React from 'react'
-import { Card, Button, Image } from 'semantic-ui-react'
+import { Card, Button, Image, Label } from 'semantic-ui-react'
+import { Product } from '../../../models/product'
+import { formatToLocalPH } from '../../../shared/utils/util'
 
-export const ProductCard = () => {
+interface IProps {
+    product: Product;
+}
+
+export const ProductCard: React.FC<IProps> = ({ product }) => {
     return (
         <Card>
             <Image src='https://i.stack.imgur.com/y9DpT.jpg' wrapped ui={false} />
             <Card.Content>
-                <Card.Header>Gtx 1050 ti</Card.Header>
+                <Label as='a' color='orange' ribbon>
+                    {formatToLocalPH(250)}
+                </Label>
+                <Card.Header style={{ marginTop: '1em' }}>{product.name}</Card.Header>
                 <Card.Meta>
-                    Stocks: 120
+                    stocks: {product.stocks}
                 </Card.Meta>
                 <Card.Description>
-                    This is a video graphics card for computer.
-            </Card.Description>
+                    {product.description}
+                </Card.Description>
             </Card.Content>
             <Card.Content extra>
                 <a>

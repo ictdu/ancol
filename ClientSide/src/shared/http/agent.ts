@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { history } from "../..";
+import { Product } from "../../models/product";
 import { User } from "../../models/user";
 
 export const API_URL = process.env.REACT_APP_API_URL;
@@ -69,10 +70,17 @@ const requests = {
 const Users = {
     login: (email: string, password: string): Promise<User> =>
         requests.post('/users/login', { email, password }),
+    currentUser: (): Promise<User> =>
+        requests.get('/users/current'),
 };
 
+const Products = {
+    list: (): Promise<Product[]> =>
+        requests.get('/products'),
+}
+
 const agent = {
-    Users
+    Users, Products
 };
 
 export default agent;

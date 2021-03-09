@@ -1,14 +1,33 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import logo from './logo.svg';
 import 'semantic-ui-css/semantic.min.css'
 import { ProductCard } from './features/seller/product/ProductCard';
 import LoginPage from './features/user/LoginPage';
 import { SellerPage } from './features/seller/SellerPage';
+import { RootStoreContext } from './stores/rootStore';
+import { Loader } from 'semantic-ui-react';
+import { observer } from 'mobx-react-lite';
 
-function App() {
+const App = () => {
+
+  const rootStore = useContext(RootStoreContext);
+  const { loadingCurrentUser, getCurrentUser, user } = rootStore.userStore;
+
+  useEffect(() => {
+    if (!user) {
+      getCurrentUser();
+    }
+  }, [user, getCurrentUser]);
+
   return (
-    <SellerPage />
+    <Fragment>
+      {loadingCurrentUser ?
+        <Loader content='Loading...' active />
+        :
+        <SellerPage />
+      }
+    </Fragment>
   );
 }
 
-export default App;
+export default observer(App);

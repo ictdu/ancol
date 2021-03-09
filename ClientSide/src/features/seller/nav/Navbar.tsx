@@ -1,9 +1,15 @@
-import React from 'react'
-import { Container, Menu, Segment, Button, Grid } from 'semantic-ui-react'
+import { observer } from 'mobx-react-lite'
+import React, { useContext } from 'react'
+import { Container, Menu, Segment, Button, Grid, Label } from 'semantic-ui-react'
+import { RootStoreContext } from '../../../stores/rootStore'
 import { ProductCard } from '../product/ProductCard'
-import { ProductList } from '../product/ProductList'
+import ProductList from '../product/ProductList'
 
-export const Navbar = () => {
+const Navbar = () => {
+
+    const rootStore = useContext(RootStoreContext);
+    const { logout } = rootStore.userStore;
+
     return (
         <Container style={{ paddingTop: '1em' }}>
             <Menu pointing secondary>
@@ -15,9 +21,10 @@ export const Navbar = () => {
                     name='Auction'
                 />
                 <Menu.Menu position='right'>
-                    <Menu.Item>Welcome, Phillip Rose</Menu.Item>
+                    <Menu.Item><Label content='Seller' style={{ marginRight: '1em' }} /> Welcome, Phillip Rose</Menu.Item>
                     <Menu.Item
                         name='logout'
+                        onClick={logout}
                     />
                 </Menu.Menu>
             </Menu>
@@ -31,3 +38,5 @@ export const Navbar = () => {
         </Container>
     )
 }
+
+export default observer(Navbar);
