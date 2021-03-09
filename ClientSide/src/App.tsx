@@ -1,8 +1,5 @@
 import React, { Fragment, useContext, useEffect } from 'react';
-import logo from './logo.svg';
 import 'semantic-ui-css/semantic.min.css'
-import { ProductCard } from './features/seller/product/ProductCard';
-import LoginPage from './features/user/LoginPage';
 import { SellerPage } from './features/seller/SellerPage';
 import { RootStoreContext } from './stores/rootStore';
 import { Loader } from 'semantic-ui-react';
