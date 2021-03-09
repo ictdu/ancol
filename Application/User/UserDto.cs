@@ -6,9 +6,7 @@ namespace Application.User
 {
     public class UserDto
     {
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
-        public string Username { get; set; }
-        public string Token { get; set; }
+        public object User { get; set; }
+        public string Type { get; set; }
     }
 }

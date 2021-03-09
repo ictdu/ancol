@@ -38,7 +38,6 @@ namespace Application.User
 
             public async Task<object> Handle(Query request, CancellationToken cancellationToken)
             {
-
                 var userInDb = await _userManager.FindByEmailAsync(request.Email);
                 if (userInDb == null)
                     throw new RestException(System.Net.HttpStatusCode.Unauthorized,
@@ -52,7 +51,11 @@ namespace Application.User
 
                 if (await _ctx.Sellers.AnyAsync(x => x.AppUserId == userInDb.Id))
                 {
-                    return _mapper.Map<SellerDto>(await _ctx.Sellers.SingleAsync(x => x.AppUserId == userInDb.Id));
+                    var seller = _mapper.Map<SellerDto>(await _ctx.Sellers.SingleAsync(x => x.AppUserId == userInDb.Id));
+                    return new UserDto
+                    {
+                        User = seller, Type = "seller"
+                    };
                 }
                 else
                 {

@@ -1,11 +1,25 @@
 import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { history } from "../..";
+import { User } from "../../models/user";
 
 export const API_URL = process.env.REACT_APP_API_URL;
 
 axios.defaults.baseURL = API_URL + '/api';
 const SLEEP_DURATION = 500;
+
+axios.interceptors.request.use(
+    (config) => {
+        const token = window.localStorage.getItem('jwt_ancol');
+        if (token) {
+            config.headers.Authorization = "Bearer " + token;
+        }
+
+        return config;
+    },
+    (error) =>
+        Promise.reject(error)
+)
 
 axios.interceptors.response.use(undefined, error => {
 
@@ -52,13 +66,13 @@ const requests = {
         axios.delete(url).then(sleep(SLEEP_DURATION)).then(responseBody),
 };
 
-const User = {
-    login: (email: string, password: string): Promise<void> =>
-        requests.post('/user/login', { email, password }),
+const Users = {
+    login: (email: string, password: string): Promise<User> =>
+        requests.post('/users/login', { email, password }),
 };
 
 const agent = {
-    User
+    Users
 };
 
 export default agent;

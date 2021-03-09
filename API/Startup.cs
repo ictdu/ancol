@@ -106,7 +106,7 @@ namespace API
 
             app.UseCors(builder =>
             {
-                builder.AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+                builder.AllowAnyMethod().AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
             });
 
             app.UseAuthentication();

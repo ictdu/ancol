@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Route, Router, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import { LoginPage } from './features/LoginPage';
+import LoginPage from './features/user/LoginPage';
 import ScrollToTop from './shared/ScrollToTop';
 
 export const history = createBrowserHistory();
