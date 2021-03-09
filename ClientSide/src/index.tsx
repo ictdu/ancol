@@ -7,11 +7,14 @@ import { Route, Router, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import LoginPage from './features/user/LoginPage';
 import ScrollToTop from './shared/ScrollToTop';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const history = createBrowserHistory();
 
 ReactDOM.render(
   <Router history={history}>
+    <ToastContainer position='bottom-left' hideProgressBar={true} />
     <ScrollToTop />
     <Switch>
       <Route path='/login' component={LoginPage} />
