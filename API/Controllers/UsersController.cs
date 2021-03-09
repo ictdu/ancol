@@ -16,5 +16,12 @@ namespace API.Controllers
         {
             return await Mediator.Send(query);
         }
+
+        [AllowAnonymous]
+        [HttpGet("current")]
+        public async Task<object> CurrentUser()
+        {
+            return await Mediator.Send(new CurrentUser.Query());
+        }
     }
 }
