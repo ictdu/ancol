@@ -1,10 +1,8 @@
 import { observer } from 'mobx-react-lite'
 import React, { useContext } from 'react'
-import { Container, Menu, Label } from 'semantic-ui-react'
+import { Menu, Label } from 'semantic-ui-react'
 import { Seller } from '../../../../models/user'
 import { RootStoreContext } from '../../../../stores/rootStore'
-import { ControlSection } from '../control/ControlSection'
-import ProductList from '../ProductList'
 
 const Navbar = () => {
 
@@ -15,7 +13,7 @@ const Navbar = () => {
 
     return (
 
-        <Menu pointing secondary>
+        <Menu pointing secondary stackable>
             <Menu.Item
                 name='Products'
                 active={true}

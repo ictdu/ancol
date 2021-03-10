@@ -9,7 +9,7 @@ interface IProps {
 
 export const ProductCard: React.FC<IProps> = ({ product }) => {
     return (
-        <Card>
+        <Card fluid>
             <Image src='https://i.stack.imgur.com/y9DpT.jpg' wrapped ui={false} />
             <Card.Content>
                 <Label as='a' color='orange' ribbon>
@@ -24,9 +24,7 @@ export const ProductCard: React.FC<IProps> = ({ product }) => {
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <a>
-                    <Button size="mini" content="View" icon='eye' />
-                </a>
+                <Button size="mini" content="View" icon='eye' />
             </Card.Content>
         </Card>
     )

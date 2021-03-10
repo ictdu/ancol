@@ -31,7 +31,9 @@ export class ProductStore {
         } catch (error) {
             console.log(error);
         } finally {
-            this.loading = false;
+            runInAction(() => {
+                this.loading = false;
+            })
         }
     };
 

@@ -1,6 +1,6 @@
-import React, { Fragment, useState } from 'react'
-import { ToastContainer } from 'react-toastify'
-import { Container, Menu, Label } from 'semantic-ui-react'
+import React, { useState } from 'react'
+import { Container } from 'semantic-ui-react'
+import { AddProduct } from './AddProduct'
 import { ControlSection } from './control/ControlSection'
 import Navbar from './nav/Navbar'
 import ProductList from './ProductList'
@@ -15,9 +15,15 @@ export const ProductPage = () => {
 
             <Navbar />
 
-            <ControlSection />
+            <ControlSection setPage={setPage} page={page} />
 
-            <ProductList />
+            {page === 'products' &&
+                <ProductList />
+            }
+
+            {page === 'add' &&
+                <AddProduct />
+            }
 
         </Container>
     )

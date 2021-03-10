@@ -17,5 +17,7 @@ namespace Domain
         public Seller Seller { get; set; }
 
         public string SellerId { get; set; }
+
+        public DateTime CreatedAt { get; set; }
     }
 }

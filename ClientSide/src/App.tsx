@@ -4,7 +4,6 @@ import { ProductPage } from './features/seller/product/ProductPage';
 import { RootStoreContext } from './stores/rootStore';
 import { Loader } from 'semantic-ui-react';
 import { observer } from 'mobx-react-lite';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 

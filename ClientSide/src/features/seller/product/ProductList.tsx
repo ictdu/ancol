@@ -10,8 +10,9 @@ const ProductList = () => {
     const { loading, productsList, getProducts } = rootStore.productStore;
 
     useEffect(() => {
-        getProducts();
-    }, [getProducts])
+        if (productsList.length === 0)
+            getProducts();
+    }, [getProducts, productsList.length])
 
     if (loading) return <Loader active inline='centered' />
 
@@ -19,8 +20,8 @@ const ProductList = () => {
         <Grid>
             {productsList.map(item => {
                 return (
-                    <Grid.Column computer='4' mobile='8'>
-                        <ProductCard product={item} key={item.id} />
+                    <Grid.Column computer='4' mobile='16' key={item.id} >
+                        <ProductCard product={item} />
                     </Grid.Column>
                 )
             })}

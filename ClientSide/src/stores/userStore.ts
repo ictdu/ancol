@@ -48,6 +48,8 @@ export class UserStore {
                     this.user = result;
                 })
             } catch (error) {
+                window.localStorage.removeItem('jwt_ancol');
+                history.push('/login');
                 console.log(error);
             } finally {
                 runInAction(() => {

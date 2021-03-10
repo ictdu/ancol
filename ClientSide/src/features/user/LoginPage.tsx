@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Button, Grid } from 'semantic-ui-react'
 import { Field, Form as FinalForm } from 'react-final-form';
 import TextInput from '../../shared/forms/TextInput';
@@ -6,11 +6,18 @@ import { observer } from 'mobx-react-lite';
 import { RootStoreContext } from '../../stores/rootStore';
 import { ErrorMessage } from '../../shared/forms/ErrorMessage';
 import { FORM_ERROR } from 'final-form';
+import { history } from '../..';
 
 const LoginPage = () => {
 
     const rootStore = useContext(RootStoreContext);
     const { loading, login } = rootStore.userStore;
+
+    useEffect(() => {
+        const token = window.localStorage.getItem('jwt_ancol');
+        if (token)
+            history.push('/');
+    })
 
     return (
         <Grid centered style={{ paddingTop: '4em' }}>
@@ -38,7 +45,7 @@ const LoginPage = () => {
                                             type='password' />
 
                                         {submitError && !dirtySinceLastSubmit &&
-                                            <ErrorMessage error={submitError}  />}
+                                            <ErrorMessage error={submitError} />}
 
                                         <Button
                                             loading={loading}
@@ -51,7 +58,7 @@ const LoginPage = () => {
                         />
 
                         <div className="ui message">
-                            New to us? <a href="#">Register</a>
+                            New to us? Register
                         </div>
                     </div>
                 </div>

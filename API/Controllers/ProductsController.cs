@@ -1,4 +1,5 @@
 ﻿using Application.Product;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,6 +16,13 @@ namespace API.Controllers
         public async Task<List<ProductDto>> List()
         {
             return await Mediator.Send(new Application.Product.List.Query());
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<Unit> Create([FromBody]Add.Command command)
+        {
+            return await Mediator.Send(command);
         }
 
     }
