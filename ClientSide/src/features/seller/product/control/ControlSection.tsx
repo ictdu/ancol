@@ -3,7 +3,7 @@ import { Segment, Button, Breadcrumb } from 'semantic-ui-react'
 
 export const ControlSection: React.FC<{ setPage: any, page: 'add' | 'edit' | 'products' }> = ({ setPage, page }) => {
     return (
-        <Segment secondary>
+        <Segment>
             {page === 'products' &&
                 <Button content="Add product" primary size="tiny" onClick={() => setPage('add')} />
             }

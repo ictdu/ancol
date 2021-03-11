@@ -5,7 +5,7 @@ import { RootStoreContext } from './stores/rootStore';
 import { Loader } from 'semantic-ui-react';
 import { observer } from 'mobx-react-lite';
 import 'react-toastify/dist/ReactToastify.css';
-import { BuyerPage } from './features/buyer/BuyerPage';
+import BuyerPage  from './features/buyer/BuyerPage';
 
 
 const App = () => {

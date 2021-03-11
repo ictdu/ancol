@@ -37,7 +37,7 @@ const EditProduct: React.FC<{ onEdit?: () => void, product: Product }> = ({ onEd
                                 [FORM_ERROR]: error
                             }))}
                         render={({ handleSubmit, submitError, dirtySinceLastSubmit }) =>
-                            <Form onSubmit={handleSubmit}>
+                            <Form onSubmit={handleSubmit} error>
                                 <Field component={TextInput}
                                     label='Name'
                                     name='name'

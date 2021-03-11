@@ -49,7 +49,8 @@ const LoginPage = () => {
 
                                         <Button
                                             loading={loading}
-                                            className='ui fluid large teal submit button'
+                                            className='ui fluid large submit button'
+                                            color='teal'
                                             type='submit' content='Login' />
                                     </div>
                                     <div className="ui error message"></div>

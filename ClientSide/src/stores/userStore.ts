@@ -8,6 +8,7 @@ export class UserStore {
 
     rootStore: RootStore;
 
+
     constructor(rootStore: RootStore) {
         makeObservable(this);
         this.rootStore = rootStore;
@@ -61,6 +62,12 @@ export class UserStore {
     }
 
     @action logout = () => {
+
+        runInAction(() => {
+            this.rootStore.productStore.productRegistry.clear();
+            this.rootStore.productStore.product = null;
+        })
+
         this.user = null;
         window.localStorage.removeItem("jwt_ancol");
         history.push('/login');

@@ -18,7 +18,7 @@ const ProductListings = () => {
     return (
         <Item.Group divided style={{ paddingBottom: '3em' }}>
             {productsList.map(prod =>
-                <ProductCardListing product={prod} />
+                <ProductCardListing product={prod} key={prod.id} />
             )}
         </Item.Group>
     )
