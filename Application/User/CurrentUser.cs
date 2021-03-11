@@ -47,6 +47,16 @@ namespace Application.User
                         Type = "seller"
                     };
                 }
+                else if (await _ctx.Buyers.AnyAsync(x => x.AppUserId == currentUserId))
+                {
+                    var buyer = _mapper.Map<BuyerDto>(await _ctx.Buyers.Include(x => x.AppUser)
+                        .SingleAsync(x => x.AppUserId == currentUserId));
+                    return new UserDto
+                    {
+                        User = buyer,
+                        Type = "buyer"
+                    };
+                }
 
 
                 throw new RestException(System.Net.HttpStatusCode.InternalServerError,

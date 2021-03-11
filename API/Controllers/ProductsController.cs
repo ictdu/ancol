@@ -18,6 +18,13 @@ namespace API.Controllers
             return await Mediator.Send(new Application.Product.List.Query());
         }
 
+        [HttpGet("all")]
+        [AllowAnonymous]
+        public async Task<List<ProductDto>> ListAll()
+        {
+            return await Mediator.Send(new Application.Product.ListAll.Query());
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<Unit> Create([FromBody] Add.Command command)

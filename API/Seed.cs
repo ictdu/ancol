@@ -46,7 +46,23 @@ namespace API
                 Products = data.Products
             };
 
+            var user2 = new AppUser
+            {
+                Email = "buyer1@test.com",
+                UserName = "buyer1",
+                Firstname = "John",
+                Lastname = "Murray"
+            };
+
+            userManager.CreateAsync(user2, "Password").Wait();
+
+            var buyer1 = new Buyer
+            {
+                AppUser = user2,
+            };
+
             ctx.Sellers.Add(seller1);
+            ctx.Buyers.Add(buyer1);
 
             ctx.SaveChanges();
         }

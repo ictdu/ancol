@@ -5,6 +5,7 @@ import { RootStoreContext } from './stores/rootStore';
 import { Loader } from 'semantic-ui-react';
 import { observer } from 'mobx-react-lite';
 import 'react-toastify/dist/ReactToastify.css';
+import { BuyerPage } from './features/buyer/BuyerPage';
 
 
 const App = () => {
@@ -23,7 +24,12 @@ const App = () => {
       {loadingCurrentUser ?
         <Loader content='Loading...' active />
         :
-        <ProductPage />
+        <Fragment>
+          {user?.type === 'seller' &&
+            <ProductPage />}
+          {user?.type === 'buyer' &&
+            <BuyerPage />}
+        </Fragment>
       }
     </Fragment>
   );

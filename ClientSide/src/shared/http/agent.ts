@@ -77,6 +77,8 @@ const Users = {
 const Products = {
     list: (): Promise<Product[]> =>
         requests.get('/products'),
+    listAll: (): Promise<Product[]> =>
+        requests.get('/products/all'),
     add: (formValues: ProductFormValues): Promise<void> =>
         requests.post('/products', formValues),
     edit: (formValues: ProductFormValues): Promise<void> =>

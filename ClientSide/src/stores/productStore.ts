@@ -46,6 +46,25 @@ export class ProductStore {
         }
     };
 
+    @action getAllProducts = async () => {
+        this.loading = true;
+        try {
+            const result = await agent.Products.listAll();
+            runInAction(() => {
+                result.forEach(item => {
+                    item.createdAt = new Date(item.createdAt);
+                    this.productRegistry.set(item.id, item);
+                })
+            })
+        } catch (error) {
+            console.log(error);
+        } finally {
+            runInAction(() => {
+                this.loading = false;
+            })
+        }
+    };
+
     @action addProduct = async (formValues: ProductFormValues) => {
         this.loading = true;
         try {

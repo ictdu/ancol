@@ -26,6 +26,13 @@ namespace Application.User
                         _configuration.GetSection("AppSettings:TokenKey").Value);
             }
 
+            if (source is Buyer)
+            {
+                Buyer user = source as Buyer;
+                return _jwtTokenGenerator.GenerateToken(user.AppUser.Id,
+                        _configuration.GetSection("AppSettings:TokenKey").Value);
+            }
+
             throw new Exception("Problem generating token");
         }
     }
