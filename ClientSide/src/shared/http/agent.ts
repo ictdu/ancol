@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { history } from "../..";
-import { Product } from "../../models/product";
+import { Product, ProductFormValues } from "../../models/product";
 import { User } from "../../models/user";
 
 export const API_URL = process.env.REACT_APP_API_URL;
@@ -77,6 +77,10 @@ const Users = {
 const Products = {
     list: (): Promise<Product[]> =>
         requests.get('/products'),
+    add: (formValues: ProductFormValues): Promise<void> =>
+        requests.post('/products', formValues),
+    edit: (formValues: ProductFormValues): Promise<void> =>
+        requests.put(`/products/${formValues.id}`, formValues),
 }
 
 const agent = {

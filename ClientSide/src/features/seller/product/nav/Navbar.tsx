@@ -13,7 +13,7 @@ const Navbar = () => {
 
     return (
 
-        <Menu pointing secondary stackable>
+        <Menu   stackable color='orange'>
             <Menu.Item
                 name='Products'
                 active={true}

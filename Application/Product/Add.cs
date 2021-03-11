@@ -44,7 +44,8 @@ namespace Application.Product
                     Description = request.Description,
                     Name = request.Name,
                     Price = request.Price,
-                    Stocks = request.Stocks
+                    Stocks = request.Stocks,
+                    CreatedAt = DateTime.Now
                 };
 
                 _context.Products.Add(product);

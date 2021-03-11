@@ -5,9 +5,10 @@ import { formatToLocalPH } from '../../../shared/utils/util'
 
 interface IProps {
     product: Product;
+    onEditClicked?: (product: Product) => void;
 }
 
-export const ProductCard: React.FC<IProps> = ({ product }) => {
+export const ProductCard: React.FC<IProps> = ({ product, onEditClicked }) => {
     return (
         <Card fluid>
             <Image src='https://i.stack.imgur.com/y9DpT.jpg' wrapped ui={false} />
@@ -24,7 +25,9 @@ export const ProductCard: React.FC<IProps> = ({ product }) => {
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <Button size="mini" content="View" icon='eye' />
+                <Button size="mini" content="Edit" icon='pencil' onClick={() => {
+                    if (onEditClicked) onEditClicked(product);
+                }} />
             </Card.Content>
         </Card>
     )

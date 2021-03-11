@@ -35,6 +35,11 @@ namespace API
 
             userManager.CreateAsync(user1, "Password").Wait();
 
+            foreach(var prod in data.Products)
+            {
+                prod.CreatedAt = DateTime.Now;
+            }
+
             var seller1 = new Seller
             {
                 AppUser = user1,

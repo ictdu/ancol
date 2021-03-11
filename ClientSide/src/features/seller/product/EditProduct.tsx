@@ -4,16 +4,17 @@ import { Field, Form as FinalForm } from 'react-final-form';
 import TextInput from '../../../shared/forms/TextInput';
 import { TextAreaInput } from '../../../shared/forms/TextAreaInput';
 import { RootStoreContext } from '../../../stores/rootStore';
-import { ProductFormValues } from '../../../models/product';
+import { Product, ProductFormValues } from '../../../models/product';
 import { FORM_ERROR } from 'final-form';
 import { ErrorMessage } from '../../../shared/forms/ErrorMessage';
 import { observer } from 'mobx-react-lite';
 
-
-const AddProduct: React.FC<{ onAdded?: () => void }> = ({ onAdded }) => {
+const EditProduct: React.FC<{ onEdit?: () => void, product: Product }> = ({ onEdit, product }) => {
 
     const userStore = useContext(RootStoreContext);
-    const { loading, addProduct } = userStore.productStore;
+    const { loading, editProduct } = userStore.productStore;
+
+    const initialValues: ProductFormValues = { ...product };
 
     return (
         <Grid>
@@ -22,17 +23,19 @@ const AddProduct: React.FC<{ onAdded?: () => void }> = ({ onAdded }) => {
                     Add Product
                 </Header>
                 <Segment attached>
-                    <FinalForm onSubmit={(values: ProductFormValues) => addProduct({
-                        ...values,
-                        stocks: +values.stocks,
-                        price: +values.price
-                    })
-                        .then(() => {
-                            if (onAdded) onAdded();
+                    <FinalForm
+                        initialValues={initialValues}
+                        onSubmit={(values: ProductFormValues) => editProduct({
+                            ...values,
+                            stocks: +values.stocks,
+                            price: +values.price
                         })
-                        .catch(error => ({
-                            [FORM_ERROR]: error
-                        }))}
+                            .then(() => {
+                                if (onEdit) onEdit();
+                            })
+                            .catch(error => ({
+                                [FORM_ERROR]: error
+                            }))}
                         render={({ handleSubmit, submitError, dirtySinceLastSubmit }) =>
                             <Form onSubmit={handleSubmit}>
                                 <Field component={TextInput}
@@ -57,6 +60,7 @@ const AddProduct: React.FC<{ onAdded?: () => void }> = ({ onAdded }) => {
                                 {submitError && !dirtySinceLastSubmit &&
                                     <ErrorMessage error={submitError} />}
 
+                                <Field component='input' type='hidden' name='id' />
                                 <Button primary content='Save' loading={loading} />
                             </Form>
                         } />
@@ -66,4 +70,4 @@ const AddProduct: React.FC<{ onAdded?: () => void }> = ({ onAdded }) => {
     )
 }
 
-export default observer(AddProduct);
+export default observer(EditProduct);

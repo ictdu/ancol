@@ -34,6 +34,13 @@ namespace Application.Product
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
+                var product = await _context.Products.FindAsync(request.Id);
+
+                product.Name = request.Name;
+                product.Description = request.Description;
+                product.Stocks = request.Stocks;
+                product.Price = request.Price;
+
                 var success = await _context.SaveChangesAsync() > 0;
 
                 if (success)
