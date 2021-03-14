@@ -88,6 +88,7 @@ namespace API
 
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddScoped<IUserAccessor, UserAccessor>();
+            services.AddScoped<IPaypalAccessor, PaypalAccessor>();
 
             services.Configure<PaypalSettings>(Configuration.GetSection("Paypal"));
         }

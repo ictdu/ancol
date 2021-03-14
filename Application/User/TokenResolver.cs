@@ -26,9 +26,9 @@ namespace Application.User
                         _configuration.GetSection("AppSettings:TokenKey").Value);
             }
 
-            if (source is Buyer)
+            if (source is Domain.Buyer)
             {
-                Buyer user = source as Buyer;
+                Domain.Buyer user = source as Domain.Buyer;
                 return _jwtTokenGenerator.GenerateToken(user.AppUser.Id,
                         _configuration.GetSection("AppSettings:TokenKey").Value);
             }

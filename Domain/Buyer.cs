@@ -13,5 +13,7 @@ namespace Domain
         [ForeignKey("AppUser")]
         public string AppUserId { get; set; }
         public AppUser AppUser { get; set; }
+
+        public ICollection<SoldProduct> Buys { get; set; }
     }
 }
