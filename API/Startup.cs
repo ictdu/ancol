@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using API.Middleware;
 using API.Security;
+using Application.Payments.Paypal;
 using Application.Security;
 using Application.User;
 using AutoMapper;
@@ -87,6 +88,8 @@ namespace API
 
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddScoped<IUserAccessor, UserAccessor>();
+
+            services.Configure<PaypalSettings>(Configuration.GetSection("Paypal"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

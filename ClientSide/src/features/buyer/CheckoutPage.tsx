@@ -12,14 +12,19 @@ export const CheckoutPage = () => {
 
     const prod = product!;
 
+    const initialValues = {
+        productId: prod.id
+    }
+
     return (
-        <Grid>
+        <Grid style={{ opacity: '0.9' }}>
             <Grid.Column computer={6} mobile={16}>
 
                 <Card fluid>
 
                     <Card.Content>
-                        <Header content='Checkout'>
+                        <Header>
+                            Checkout
                         </Header>
                     </Card.Content>
                     <Card.Content>
@@ -43,12 +48,15 @@ export const CheckoutPage = () => {
                     <Label.Detail>{prod.stocks}</Label.Detail>
                         </Label>
                         <FinalForm onSubmit={(values) => console.log(values)}
-                            render={({ }) =>
-                                <Form error>
+                            initialValues={initialValues}
+                            render={({ handleSubmit, submitError, dirtySinceLastSubmit }) =>
+                                <Form error onSubmit={handleSubmit}>
                                     <Field name='qty' component={TextInput}
                                         placeholder='Qty'
                                         type='number' />
-
+                                    <Field name='productId'
+                                        component='input'
+                                        type='hidden' />
 
                                     <Button primary content='Checkout' type='submit' size='tiny' />
                                     <Button size='tiny' basic content='Cancel' type='button' onClick={() => {
