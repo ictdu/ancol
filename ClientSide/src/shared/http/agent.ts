@@ -87,8 +87,8 @@ const Products = {
 }
 
 const Buyers = {
-    buy: (productId: string, qty: number): Promise<OrderData> =>
-        requests.post('/buyers/buy', { productId, qty })
+    buy: (productId: string, qty: number, shippingAddress: string): Promise<OrderData> =>
+        requests.post('/buyers/buy', { productId, qty, shippingAddress })
 }
 
 const agent = {

@@ -19,6 +19,7 @@ namespace Application.Buyer
         {
             public Guid ProductId { get; set; }
             public int Qty { get; set; }
+            public string ShippingAddress { get; set; }
         }
 
         public class Handler : IRequestHandler<Query, PaypalOrderDto>
@@ -53,6 +54,7 @@ namespace Application.Buyer
                     Price = product.Price,
                     ProductId = product.Id,
                     Qty = request.Qty,                    
+                    ShippingAddress = request.ShippingAddress
                 };
 
                 _ctx.SoldProducts.Add(soldProduct);

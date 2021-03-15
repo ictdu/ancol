@@ -73,7 +73,7 @@ const CheckoutPage = () => {
                             Stocks
                     <Label.Detail>{prod.stocks}</Label.Detail>
                         </Label>
-                        <FinalForm onSubmit={(values) => buy(values.productId, +values.qty)
+                        <FinalForm onSubmit={(values) => buy(values.productId, +values.qty, values.shippingAddress)
                             .then(response => {
                                 setState({
                                     order: response
@@ -89,6 +89,8 @@ const CheckoutPage = () => {
                                     <Field name='qty' component={TextInput}
                                         placeholder='Qty'
                                         type='number' />
+                                    <Field name='shippingAddress' component={TextInput}
+                                        placeholder='Shipping Address' />
                                     <Field name='productId'
                                         component='input'
                                         type='hidden' />

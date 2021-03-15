@@ -21,6 +21,8 @@ namespace Domain
         public decimal Price { get; set; }
         public int Qty { get; set; }
 
+        public string ShippingAddress { get; set; }
+
         public bool IsCaptured { get; set; }
 
         public DateTime CreatedAt { get; set; }

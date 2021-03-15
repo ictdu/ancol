@@ -13,10 +13,10 @@ export class BuyerStore {
         makeObservable(this);
     }
 
-    @action buy = async (productId: string, qty: number) => {
+    @action buy = async (productId: string, qty: number, shippingAddress: string) => {
         this.loading = true;
         try {
-            const result = await agent.Buyers.buy(productId, qty);
+            const result = await agent.Buyers.buy(productId, qty, shippingAddress);
             return result;
         } catch (error) {
             throw error;
