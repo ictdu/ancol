@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210311072643_CreateBuyersTable")]
-    partial class CreateBuyersTable
+    [Migration("20210314113323_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -141,6 +141,39 @@ namespace Persistence.Migrations
                     b.HasKey("AppUserId");
 
                     b.ToTable("Sellers");
+                });
+
+            modelBuilder.Entity("Domain.SoldProduct", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(767)");
+
+                    b.Property<string>("BuyerId")
+                        .HasColumnType("varchar(767)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<bool>("IsCaptured")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<byte[]>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<int>("Qty")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BuyerId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("SoldProducts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -360,6 +393,19 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.AppUser", "AppUser")
                         .WithMany()
                         .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.SoldProduct", b =>
+                {
+                    b.HasOne("Domain.Buyer", "Buyer")
+                        .WithMany("Buys")
+                        .HasForeignKey("BuyerId");
+
+                    b.HasOne("Domain.Product", "Product")
+                        .WithMany("Buyers")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

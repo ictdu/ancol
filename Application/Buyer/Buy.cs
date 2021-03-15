@@ -9,6 +9,7 @@ using Application.Errors;
 using Microsoft.EntityFrameworkCore;
 using Application.Payments.Paypal;
 using AutoMapper;
+using Application.User;
 
 namespace Application.Buyer
 {
@@ -25,19 +26,38 @@ namespace Application.Buyer
             private readonly DataContext _ctx;
             private readonly IMapper _mapper;
             private readonly IPaypalAccessor _paypalAccessor;
+            private readonly IUserAccessor _userAccessor;
 
-            public Handler(DataContext ctx, IMapper mapper, IPaypalAccessor paypalAccessor)
+            public Handler(DataContext ctx, IMapper mapper, IPaypalAccessor paypalAccessor, IUserAccessor userAccessor)
             {
                 _ctx = ctx;
                 _mapper = mapper;
                 this._paypalAccessor = paypalAccessor;
+                this._userAccessor = userAccessor;
             }
 
             public async Task<PaypalOrderDto> Handle(Query request, CancellationToken cancellationToken)
             {
+                //var buyer = await _ctx.Buyers.FindAsync(_userAccessor.GetCurrentUserId());
+
                 var product = await  _ctx.Products.FindAsync(request.ProductId);
 
                 var result = _paypalAccessor.CreateOrder(product.Price * request.Qty);
+
+                var soldProduct = new Domain.SoldProduct
+                {
+                    BuyerId = _userAccessor.GetCurrentUserId(),
+                    Id = result.OrderId,
+                    CreatedAt = DateTime.Now,
+                    IsCaptured = false,
+                    Price = product.Price,
+                    ProductId = product.Id,
+                    Qty = request.Qty,                    
+                };
+
+                _ctx.SoldProducts.Add(soldProduct);
+
+                await _ctx.SaveChangesAsync();
 
                 return result;
             }

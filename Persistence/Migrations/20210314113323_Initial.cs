@@ -181,6 +181,23 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Buyers",
+                columns: table => new
+                {
+                    AppUserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Buyers", x => x.AppUserId);
+                    table.ForeignKey(
+                        name: "FK_Buyers_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Sellers",
                 columns: table => new
                 {
@@ -206,7 +223,9 @@ namespace Persistence.Migrations
                     Stocks = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     ImagePath = table.Column<string>(nullable: true),
-                    SellerId = table.Column<string>(nullable: true)
+                    Price = table.Column<decimal>(nullable: false),
+                    SellerId = table.Column<string>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -217,6 +236,35 @@ namespace Persistence.Migrations
                         principalTable: "Sellers",
                         principalColumn: "AppUserId",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SoldProducts",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    ProductId = table.Column<byte[]>(nullable: false),
+                    BuyerId = table.Column<string>(nullable: true),
+                    Price = table.Column<decimal>(nullable: false),
+                    Qty = table.Column<int>(nullable: false),
+                    IsCaptured = table.Column<bool>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SoldProducts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SoldProducts_Buyers_BuyerId",
+                        column: x => x.BuyerId,
+                        principalTable: "Buyers",
+                        principalColumn: "AppUserId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SoldProducts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -260,6 +308,16 @@ namespace Persistence.Migrations
                 name: "IX_Products_SellerId",
                 table: "Products",
                 column: "SellerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SoldProducts_BuyerId",
+                table: "SoldProducts",
+                column: "BuyerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SoldProducts_ProductId",
+                table: "SoldProducts",
+                column: "ProductId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -283,10 +341,16 @@ namespace Persistence.Migrations
                 name: "IdentityUser");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "SoldProducts");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Buyers");
+
+            migrationBuilder.DropTable(
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Sellers");

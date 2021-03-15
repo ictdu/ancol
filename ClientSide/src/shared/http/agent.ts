@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { history } from "../..";
+import { OrderData } from "../../models/paypal";
 import { Product, ProductFormValues } from "../../models/product";
 import { User } from "../../models/user";
 
@@ -85,8 +86,13 @@ const Products = {
         requests.put(`/products/${formValues.id}`, formValues),
 }
 
+const Buyers = {
+    buy: (productId: string, qty: number): Promise<OrderData> =>
+        requests.post('/buyers/buy', { productId, qty })
+}
+
 const agent = {
-    Users, Products
+    Users, Products, Buyers
 };
 
 export default agent;

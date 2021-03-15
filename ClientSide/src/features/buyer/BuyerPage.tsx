@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import { Container } from 'semantic-ui-react'
 import { RootStoreContext } from '../../stores/rootStore'
 import { BuyerNavbar } from './BuyerNavbar'
-import { CheckoutPage } from './CheckoutPage'
+import CheckoutPage from './CheckoutPage'
 import ProductListings from './ProductListings'
 
 const BuyerPage = () => {

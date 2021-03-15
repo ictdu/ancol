@@ -22,7 +22,8 @@ namespace Application.Payments.Paypal
             _paypalSettings = new PaypalSettings
             {
                 ClientId = paypalSettings.Value.ClientId,
-                Secret = paypalSettings.Value.Secret
+                Secret = paypalSettings.Value.Secret,
+                ReturnUrl = paypalSettings.Value.ReturnUrl
             };
 
             PayPalEnvironment environment = new SandboxEnvironment(_paypalSettings.ClientId, _paypalSettings.Secret);
@@ -62,7 +63,7 @@ namespace Application.Payments.Paypal
                 },
                 ApplicationContext = new ApplicationContext()
                 {
-                    ReturnUrl = _requestHost + "return",
+                    ReturnUrl = _paypalSettings.ReturnUrl,
                     CancelUrl = _requestHost + "cancel",
                 }
             };
